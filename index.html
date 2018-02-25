@@ -18,6 +18,7 @@
 		// load game resources
 		var images = [];
 		
+		// prepares an image to be loaded and returns the element
 		function addImage(imgSrc) {
 			var newImg = new Image();
 			images.push({img:newImg, src:imgSrc});
@@ -30,15 +31,16 @@
 		var pressSpace 		= addImage("images/press_space.png");
 		var digits 		= addImage("images/digits.png");
 		
-		// load each image and then start
-		var currentImage = 0;
+		// load each image and then start the game loop
 		function loadImages() {
-			if (currentImage < images.length) {
+			if (images.length > 0) {
 				
+				// load the first image in the array
 				images[currentImage].img.onload = loadImages;
-				images[currentImage].img.src = images[currentImage].src;
+				images[currentImage].img.src = images[0].src;
 				
-				currentImage++;
+				// delete the first element of the array
+				images.shift();
 				
 			} else {
 				start();
@@ -60,6 +62,10 @@
 			
 		// game loop
 		function start() {
+			// start the first game state
+			titleScreenStart();
+			
+			// start the game loop
 			window.setInterval(function() {
 				currentState();
 				setFavicon();
