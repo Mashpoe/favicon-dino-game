@@ -76,12 +76,23 @@
 		// title screen
 		var showPressSpace = true;
 		var toggleSpaceInterval;
-		function toggleSpace() {
+		function titleScreenToggleSpace() {
 			showPressSpace = !showPressSpace;
+		}
+			
+		function titleScreenInput(event) {
+			// 32 = space
+			if (event.keyCode == 32) {
+				// start the game
+				titleScreenQuit();
+				currentState = game();
+				gameStart();
+			}	
 		}
 		
 		function titleScreenStart() {
-			toggleSpaceInterval = window.setInterval(toggleSpace, 500);
+			toggleSpaceInterval = window.setInterval(titleScreenToggleSpace, 500);
+			window.addEventListener("keydown", titleScreenInput);
 		}
 			
 		function titleScreen() {
@@ -107,6 +118,7 @@
 			
 		function titleScreenQuit() {
 			window.clearInterval(toggleSpaceInterval);
+			window.removeEventListener("keydown", titleScreenInput);
 		}
 			
 		// game
