@@ -1,84 +1,84 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="shortcut icon" type="image/ico" href="favicon.ico" id="favicon">
+		<link rel="shortcut icon" type="image/ico" href="images/favicon.ico" id="favicon">
 	</head>
 	<body>
 		
 		
 		
 		<script>
-			// create the canvas
-			var canvas = document.createElement("CANVAS");
-			var ctx = canvas.getContext("2d");
-			canvas.width = 16;
-			canvas.height = 16;
-			document.body.appendChild(canvas);
-			
-			// load game resources
-			var images = [];
-			
-			function addImage(imgSrc) {
-				var newImg = new Image();
-				images.push({img:newImg, src:imgSrc});
-				return newImg;
-			}
-			
-			// create image objects
-			var dinoImage 		= addImage("dino.png");
-			var cacti 			= addImage("cacti.png");
-			var pressSpace 		= addImage("press_space.png");
-			var digits 			= addImage("digits.png");
-			
-			// load each image and then start
-			var currentImage = 0;
-			function loadImages() {
-				if (currentImage < images.length) {
-					
-					images[currentImage].img.onload = loadImages;
-					images[currentImage].img.src = images[currentImage].src;
-					
-					currentImage++;
-					
-				} else {
-					start();
-					console.log("start");
-				}
-			}
-			loadImages();
-			
-			
-			// game state functions
-			var currentState = titleScreen;
-			
-			function titleScreen() {
+		// create the canvas
+		var canvas = document.createElement("CANVAS");
+		var ctx = canvas.getContext("2d");
+		canvas.width = 16;
+		canvas.height = 16;
+		document.body.appendChild(canvas);
+		
+		// load game resources
+		var images = [];
+		
+		function addImage(imgSrc) {
+			var newImg = new Image();
+			images.push({img:newImg, src:imgSrc});
+			return newImg;
+		}
+		
+		// create image objects
+		var dinoImage 		= addImage("images/dino.png");
+		var cacti 		= addImage("images/cacti.png");
+		var pressSpace 		= addImage("images/press_space.png");
+		var digits 		= addImage("images/digits.png");
+		
+		// load each image and then start
+		var currentImage = 0;
+		function loadImages() {
+			if (currentImage < images.length) {
 				
+				images[currentImage].img.onload = loadImages;
+				images[currentImage].img.src = images[currentImage].src;
+				
+				currentImage++;
+				
+			} else {
+				start();
+				console.log("start");
 			}
+		}
+		loadImages();
+		
+		
+		// game state functions
+		var currentState = titleScreen;
+		
+		function titleScreen() {
 			
-			
-			
-			// render
-			function render() {
-				ctx.drawImage(dinoImage, 0, 9);
-			}
-			
-			function setFavicon() {
-				var favicon = document.getElementById("favicon");
-				var newIcon = favicon.cloneNode(true);
-				newIcon.setAttribute("href", canvas.toDataURL());
-				favicon.parentNode.replaceChild(newIcon, favicon);
-			}
-			
-			
-			// game loop
-			function start() {
-				window.setInterval(function() {
-					currentState();
-					render();
-					setFavicon();
-				}, 50);
-			}
-			
+		}
+		
+		
+		
+		// render
+		function render() {
+			ctx.drawImage(dinoImage, 0, 9);
+		}
+		
+		function setFavicon() {
+			var favicon = document.getElementById("favicon");
+			var newIcon = favicon.cloneNode(true);
+			newIcon.setAttribute("href", canvas.toDataURL());
+			favicon.parentNode.replaceChild(newIcon, favicon);
+		}
+		
+		
+		// game loop
+		function start() {
+			window.setInterval(function() {
+				currentState();
+				render();
+				setFavicon();
+			}, 50);
+		}
+		
 		</script>
 	</body>
 </html>
