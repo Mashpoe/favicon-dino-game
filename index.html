@@ -47,21 +47,7 @@
 		}
 		loadImages();
 		
-		
-		// game state functions
-		var currentState = titleScreen;
-		
-		function titleScreen() {
-			
-		}
-		
-		
-		
-		// render
-		function render() {
-			ctx.drawImage(dinoImage, 0, 9);
-		}
-		
+		// sets the favicon (duh)
 		function setFavicon() {
 			var favicon = document.getElementById("favicon");
 			var newIcon = favicon.cloneNode(true);
@@ -69,14 +55,75 @@
 			favicon.parentNode.replaceChild(newIcon, favicon);
 		}
 		
-		
+		// game state function
+		var currentState = titleScreen;
+			
 		// game loop
 		function start() {
 			window.setInterval(function() {
 				currentState();
-				render();
 				setFavicon();
 			}, 50);
+		}
+			
+		/* game states */
+			
+		// title screen
+			
+		// variables
+		var showPressSpace = true;
+		var toggleSpaceInterval;
+		function toggleSpace() {
+			space = !space;
+		}
+		
+		function titleScreenStart() {
+			toggleSpaceInterval = window.setInterval(toggleSpace, 500);
+		}
+			
+		function titleScreen() {
+			titleScreenUpdate();
+			titleScreenRender();
+		}
+		
+		function titleScreenUpdate() {
+			window.clearInterval(toggleSpaceInterval);
+		}
+			
+		function titleScreenRender() {
+			ctx.drawImage(pressSpace, 0, 0);
+			ctx.drawImage(dinoImage, 0, 9);
+		}
+			
+		function titleScreenQuit() {
+			
+		}
+			
+		// game
+		function gameStart() {
+			
+		}
+			
+		function game() {
+			gameUpdate();
+			gameRender();
+		}
+			
+		function gameUpdate() {
+			
+		}
+		
+		function gameRender() {
+			
+		}
+			
+		function gameQuit() {
+			
+		}
+			
+		// game over
+		function gameOver() {
+			// do stuff
 		}
 		
 		</script>
