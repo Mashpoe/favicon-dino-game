@@ -134,7 +134,7 @@
 		var dinoY = 0; // the bottom of the dino's feet (distance from bottom of icon)
 		var yVel = 0.0;
 		function gameStart() {
-			yVel = 2.0;
+			yVel = 0.2;
 		}
 			
 		function game() {
@@ -150,7 +150,7 @@
 			}
 			
 			if (dinoY > 0) {
-				yVel -= 0.1;
+				yVel -= 0.05;
 			} else {
 				if (spaceDown) {
 					yVel = 2.0;
@@ -164,7 +164,7 @@
 			ctx.fillRect(0,0,16,16);
 			
 			// draw dino
-			ctx.drawImage(dinoImage, 0, 16 - (dinoY + 6));
+			ctx.drawImage(dinoImage, 0, 16 - (dinoY + 6) + 1);
 		}
 			
 		function gameQuit() {
