@@ -74,8 +74,6 @@
 		/* game states */
 			
 		// title screen
-			
-		// variables
 		var showPressSpace = true;
 		var toggleSpaceInterval;
 		function toggleSpace() {
@@ -96,8 +94,10 @@
 		}
 			
 		function titleScreenRender() {
-			ctx.drawImage(pressSpace, 0, 0);
-			ctx.drawImage(dinoImage, 0, 9);
+			if (showPressSpace) {
+				ctx.drawImage(pressSpace, 0, 0);
+			}
+			ctx.drawImage(dinoImage, 0, 11);
 		}
 			
 		function titleScreenQuit() {
