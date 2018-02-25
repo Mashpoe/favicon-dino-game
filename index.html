@@ -35,8 +35,8 @@
 			if (images.length > 0) {
 				
 				// load the first image in the array
-				images[currentImage].img.onload = loadImages;
-				images[currentImage].img.src = images[0].src;
+				images[0].img.onload = loadImages;
+				images[0].img.src = images[0].src;
 				
 				// delete the first element of the array
 				images.shift();
