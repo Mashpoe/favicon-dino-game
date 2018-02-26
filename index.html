@@ -191,6 +191,9 @@
 					yVel = 0.8;
 				}
 			}
+			
+			// update the score
+			score++;
 		}
 		
 		function gameRender() {
@@ -221,7 +224,14 @@
 			ctx.drawImage(dinoImage, 0, 16 - (dinoY + 4));
 			
 			// draw score
+			var scoreStr = score.toString();
 			
+			for (var i = 0; i < 3; i++) {
+				if (i > scoreStr.length - 1) {
+					var digit = parseInt(scoreStr[scoreStr.length - i]);
+					ctx.drawImage(digits, digit * 4, 0, 16 - (i * 4), 0, 4, 5);
+				}
+			}
 		}
 			
 		function gameQuit() {
