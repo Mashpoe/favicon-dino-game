@@ -4,9 +4,6 @@
 		<link rel="shortcut icon" type="image/ico" href="images/favicon.ico" id="favicon">
 	</head>
 	<body>
-		
-		
-		
 		<script>
 		// create the canvas
 		var canvas = document.createElement("CANVAS");
@@ -133,8 +130,13 @@
 		var dinoX = 8; // the tip of the dino's nose
 		var dinoY = 0; // the bottom of the dino's feet (distance from bottom of icon)
 		var yVel = 0.0;
+		
+		var cacti = []; // stores x pos and type of cacti
+			
+		score
 		function gameStart() {
 			yVel = 0.5;
+			
 		}
 			
 		function game() {
@@ -143,6 +145,8 @@
 		}
 			
 		function gameUpdate() {
+			
+			// update player
 			dinoY += yVel;
 			if (dinoY <= 0) {
 				dinoY = 0;
@@ -156,6 +160,32 @@
 					yVel = 0.5;
 				}
 			}
+			
+			// update cacti
+			for (var i = 0; i < cacti.length; i++) {
+				cacti[i].x--;
+				if (cacti[i].x < -4) {
+					// remove the cactus if it has left the screen
+					cacti.splice(i, 1);
+				}
+			}
+			
+			// create cacti
+			if (cacti.length > 0) {
+				if (cacti[cacti.length - 1].x < 16) {
+					// distance from the right edge of the icon from 8-16 pixels
+					var distance = Math.floor(Math.random() * 8) + 8;
+					
+					// random cactus type from 1-2
+					var type = Math.floor(Math.random() * 2) + 1;
+					
+					// make the cactus
+					cacti.push({x:16 + distance, type:type});
+				}
+			} else {
+				// make a new cactus if there are none
+				cacti.push({x:16, type:0});	
+			}
 		}
 		
 		function gameRender() {
@@ -163,8 +193,30 @@
 			ctx.fillStyle="#fff";
 			ctx.fillRect(0,0,16,16);
 			
+			// draw cacti
+			for (var i = 0; i < cacti.length; i++) {
+				var clipX;
+				var clipY = 0;
+				switch(cacti[i].type) {
+					case 1:
+						clipX = 0;
+						break;
+					case 2:
+						clipX = 5;
+						break;
+					default:
+						clipX = 0;
+						break;
+				}
+				
+				ctx.drawImage(cacti, clipX, clipY, 5, 5, cacti[i].x, 11 /* 16 - 5 = 11 */);
+			}
+			
 			// draw dino
 			ctx.drawImage(dinoImage, 0, 16 - (dinoY + 6) + 1);
+			
+			// draw score
+			
 		}
 			
 		function gameQuit() {
