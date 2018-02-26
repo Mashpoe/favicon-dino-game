@@ -227,7 +227,7 @@
 			var scoreStr = score.toString();
 			
 			for (var i = 0; i < 3; i++) {
-				if (i > scoreStr.length - 1) {
+				if (i > scoreStr.length) {
 					// draw 0
 					ctx.drawImage(digits, 0, 0, 4, 5, 16 - ((i + 1) * 4), 0, 4, 5);
 				} else {
