@@ -146,30 +146,6 @@
 			
 		function gameUpdate() {
 			
-			// update player
-			dinoY += yVel;
-			if (dinoY <= 0) {
-				dinoY = 0;
-				yVel = 0.0;
-			}
-			
-			if (dinoY > 0) {
-				yVel -= 0.05;
-			} else {
-				if (spaceDown) {
-					yVel = 0.8;
-				}
-			}
-			
-			// update cacti
-			for (var i = 0; i < cacti.length; i++) {
-				cacti[i].x--;
-				if (cacti[i].x < -4) {
-					// remove the cactus if it has left the screen
-					cacti.splice(i, 1);
-				}
-			}
-			
 			// create cacti
 			if (cacti.length > 0) {
 				if (cacti[cacti.length - 1].x < 16) {
@@ -185,6 +161,35 @@
 			} else {
 				// make a new cactus if there are none
 				cacti.push({x:16, type:0});	
+			}
+			
+			// update cacti
+			for (var i = 0; i < cacti.length; i++) {
+				
+				if (cacti[i].x < 7 && dinoY < 5) {
+					currentState = gameOver;
+				} else {
+					cacti[i].x--;
+					if (cacti[i].x < -4) {
+						// remove the cactus if it has left the screen
+						cacti.splice(i, 1);
+					}
+				}
+			}
+			
+			// update player
+			dinoY += yVel;
+			if (dinoY <= 0) {
+				dinoY = 0;
+				yVel = 0.0;
+			}
+			
+			if (dinoY > 0) {
+				yVel -= 0.05;
+			} else {
+				if (spaceDown) {
+					yVel = 0.8;
+				}
 			}
 		}
 		
