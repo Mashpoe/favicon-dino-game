@@ -139,7 +139,9 @@
 		
 		function gameStart() {
 			yVel = 0.8;
+			dinoY = 0;
 			score = 0;
+			cacti = []; // empty cacti array
 		}
 			
 		function game() {
@@ -171,6 +173,8 @@
 				
 				if (cacti[i].x < 4 && dinoY < 3) {
 					currentState = gameOver;
+					gameOverStart();
+					return; // exit the update function
 				} else {
 					cacti[i].x--;
 					if (cacti[i].x < -4) {
