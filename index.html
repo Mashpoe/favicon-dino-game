@@ -84,6 +84,10 @@
 			}, 100);
 		}
 			
+		// globals
+		var highScore = 0;
+		var score = 0;
+			
 		/* game states */
 			
 		// title screen
@@ -132,8 +136,7 @@
 		var yVel = 0.0;
 		
 		var cacti = []; // stores x pos and type of cacti
-			
-		var score;
+		
 		function gameStart() {
 			yVel = 0.8;
 			score = 0;
@@ -229,12 +232,16 @@
 			// draw digits from largest to smallest
 			for (var i = 4; i-- > 0;) {
 				if (i > scoreStr.length - 1) {
-					// draw 0
-					ctx.drawImage(digits, 0, 0, 4, 5, 16 - ((i + 1) * 4), 0, 4, 5);
+					// draw placeholder 0
+					var digitSheetPos = 0 * 4;
+					ctx.drawImage(digits, digitSheetPos, 0, 4, 5, 16 - ((i + 1) * 4), 0, 4, 5);
 				} else {
-					// draw current digit
+					// get the current digit from the string
 					var digit = parseInt(scoreStr[(scoreStr.length - 1) - i]);
-					ctx.drawImage(digits, digit * 4, 0, 4, 5, 16 - ((i + 1) * 4), 0, 4, 5);
+					
+					// draw current digit
+					var digitSheetPos = digit * 4;
+					ctx.drawImage(digits, digitSheetPos, 0, 4, 5, 16 - ((i + 1) * 4), 0, 4, 5);
 				}
 			}
 		}
@@ -244,8 +251,29 @@
 		}
 			
 		// game over
+		var newSpacePress = true;
+		function gameOverStart() {
+			
+			// set and display high score
+			if (score > highScore) {
+				highScore = score;
+				document.title = "HI: " + highScore;
+			}
+			
+			if (spaceDown) {
+				// prevent the game from starting over if space was already held down
+				newSpacePress = false;
+			}
+		}
+		
 		function gameOver() {
-			// do stuff
+			// prevent the game from starting over if space was already held down
+			if (spaceDown && newSpacePress) {
+				currentState = game;
+				gameStart();
+			} else if (!spaceDown && !newSpacePress) {
+				newSpacePress = true;
+			}
 		}
 		
 		</script>
