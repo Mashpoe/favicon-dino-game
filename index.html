@@ -229,7 +229,7 @@
 			for (var i = 0; i < 3; i++) {
 				if (i > scoreStr.length - 1) {
 					// draw 0
-					ctx.drawImage(digits, 0, 0, 16 - (i * 4), 0, 4, 5);
+					ctx.drawImage(digits, 0, 0, 4, 5, 16 - (i * 4), 0, 4, 5);
 				} else {
 					// draw current digit
 					var digit = parseInt(scoreStr[scoreStr.length - i]);
