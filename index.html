@@ -50,9 +50,11 @@
 		// sets the favicon (duh)
 		function setFavicon() {
 			var favicon = document.getElementById("favicon");
-			var newIcon = favicon.cloneNode(true);
-			newIcon.setAttribute("href", canvas.toDataURL());
-			favicon.parentNode.replaceChild(newIcon, favicon);
+			//var newIcon = favicon.cloneNode(true);
+			//newIcon.setAttribute("href", canvas.toDataURL());
+			//favicon.parentNode.replaceChild(newIcon, favicon);
+			favicon.setAttribute("href", canvas.toDataURL());
+			window.location.hash = window.location.hash == "l" ? "I" : "l";
 		}
 			
 		// event handling
