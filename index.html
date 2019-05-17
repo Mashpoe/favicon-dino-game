@@ -180,7 +180,7 @@
 					gameOverStart();
 					return; // exit the update function
 				} else {
-					cacti[i].x -= xSpeed;
+					cacti[i].x--;
 					if (cacti[i].x < -4) {
 						// remove the cactus if it has left the screen
 						cacti.splice(i, 1);
