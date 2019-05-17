@@ -54,7 +54,7 @@
 			//newIcon.setAttribute("href", canvas.toDataURL());
 			//favicon.parentNode.replaceChild(newIcon, favicon);
 			favicon.setAttribute("href", canvas.toDataURL());
-			window.location.hash = window.location.hash == "l" ? "I" : "l";
+			history.replaceState(null, null, window.location.hash == "1" ? "#0" : "#1");
 		}
 			
 		// event handling
@@ -84,7 +84,7 @@
 			window.setInterval(function() {
 				currentState();
 				setFavicon();
-			}, 5);
+			}, 20);
 		}
 			
 		// globals
