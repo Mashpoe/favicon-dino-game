@@ -137,6 +137,7 @@
 		var dinoX = 8; // the tip of the dino's nose
 		var dinoY = 0; // the bottom of the dino's feet (distance from bottom of icon)
 		var yVel = 0.0;
+		var xSpeed = 0.05;
 		
 		var cacti = []; // stores x pos and type of cacti
 		
@@ -179,7 +180,7 @@
 					gameOverStart();
 					return; // exit the update function
 				} else {
-					cacti[i].x--;
+					cacti[i].x -= xSpeed;
 					if (cacti[i].x < -4) {
 						// remove the cactus if it has left the screen
 						cacti.splice(i, 1);
