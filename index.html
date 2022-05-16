@@ -39,10 +39,10 @@
 		}
 		
 		// create image objects
-		var dinoImage 		= addImage("images/dino.png");
-		var cactiImage 		= addImage("images/cacti.png");
-		var pressSpace 		= addImage("images/press_space.png");
-		var digits 		= addImage("images/digits.png");
+		var dinoImage 	= addImage("images/dino.png");
+		var cactiImage 	= addImage("images/cacti.png");
+		var pressSpace 	= addImage("images/press_space.png");
+		var digits = addImage("images/digits.png");
 		
 		loadImages();
 		
@@ -133,6 +133,7 @@
 		var dinoY = 0; // the bottom of the dino's feet (distance from bottom of icon)
 		var yVel = 0.0;
 		var xSpeed = 1.0;
+		var thing = 0.3;
 		
 		var cacti = []; // stores x pos and type of cacti
 		
@@ -228,7 +229,7 @@
 			}
 			
 			// draw dino
-			ctx.drawImage(dinoImage, 0, 16 - (dinoY + 3 + 1)); // does a . work? eh im making it more complicated.
+			ctx.drawImage(dinoImage, 0, 16 - (dinoY + 4 + thing)); //eh
 			
 			var scoreStr = score.toString(); // draw score
 			
@@ -252,7 +253,6 @@
 			
 		// game over
 		var newSpacePress = true;
-//              var susBaka = false;
 		function gameOverStart() {
 			
 			// set and display high score
