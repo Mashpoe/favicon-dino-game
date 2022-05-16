@@ -56,14 +56,12 @@
 		// event handling
 		var spaceDown = false;
 		window.addEventListener("keydown", function(event) {
-			// 32 = space
-			if (event.keyCode == 32) {
+			if (event.keyCode == 32) { // 32 = space
 				spaceDown = true;
 			}
 		})
 		window.addEventListener("keyup", function(event) {
-			// 32 = space
-			if (event.keyCode == 32) {
+			if (event.keyCode == 32) { // 32 = space
 				spaceDown = false;
 			}
 		})
@@ -87,7 +85,7 @@
 		var highScore = 0;
 		var score = 0;
 			
-		// game states
+		// game states (unused?)
 			
 		// title screen
 		var showPressSpace = true;
@@ -230,34 +228,31 @@
 			}
 			
 			// draw dino
-			ctx.drawImage(dinoImage, 0, 16 - (dinoY + 4));
+			ctx.drawImage(dinoImage, 0, 16 - (dinoY + 3 + 1)); // does a . work? eh im making it more complicated.
 			
-			// draw score
-			var scoreStr = score.toString();
+			var scoreStr = score.toString(); // draw score
 			
 			// draw digits from largest to smallest
 			for (var i = 4; i-- > 0;) {
 				if (i > scoreStr.length - 1) {
-					// draw placeholder 0
-					var digitSheetPos = 0 * 4;
+					var digitSheetPos = 0 * 4; // draw placeholder 0
 					ctx.drawImage(digits, digitSheetPos, 0, 4, 5, 16 - ((i + 1) * 4), 0, 4, 5);
 				} else {
-					// get the current digit from the string
-					var digit = parseInt(scoreStr[(scoreStr.length - 1) - i]);
+					var digit = parseInt(scoreStr[(scoreStr.length - 1) - i]); // get the current digit from the string
 					
-					// draw current digit
-					var digitSheetPos = digit * 4;
+					var digitSheetPos = digit * 4; // draw current digit
 					ctx.drawImage(digits, digitSheetPos, 0, 4, 5, 16 - ((i + 1) * 4), 0, 4, 5);
 				}
 			}
 		}
 			
 		function gameQuit() {
-			yVel = 0;
+			yVel = 0; // reset yVel.
 		}
 			
 		// game over
 		var newSpacePress = true;
+//              var susBaka = false;
 		function gameOverStart() {
 			
 			// set and display high score
@@ -267,17 +262,15 @@
 			}
 			
 			if (spaceDown) {
-				// prevent the game from starting over if space was already held down
-				newSpacePress = false;
+				newSpacePress = false;	// prevent the game from starting over if space was already held down
 			}
 		}
 		
 		function gameOver() {
-			// prevent the game from starting over if space was already held down
-			if (spaceDown && newSpacePress) {
+			if (spaceDown && newSpacePress) { // prevent the game from starting over if space was already held down
 				currentState = game;
 				gameStart();
-			} else if (!spaceDown && !newSpacePress) {
+			} else if (!spaceDown && !newSpacePress) { // prevent the game from starting over if space was already held down
 				newSpacePress = true;
 			}
 		}
