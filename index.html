@@ -35,7 +35,6 @@
 				
 			} else {
 				start();
-				console.log("start");
 			}
 		}
 		
@@ -47,12 +46,9 @@
 		
 		loadImages();
 		
-		// sets the favicon (duh)
+		// sets the favicon
 		function setFavicon() {
 			var favicon = document.getElementById("favicon");
-			//var newIcon = favicon.cloneNode(true);
-			//newIcon.setAttribute("href", canvas.toDataURL());
-			//favicon.parentNode.replaceChild(newIcon, favicon);
 			favicon.setAttribute("href", canvas.toDataURL());
 			history.replaceState(null, null, window.location.hash == "#1" ? "#0" : "#1");
 		}
@@ -91,7 +87,7 @@
 		var highScore = 0;
 		var score = 0;
 			
-		/* game states */
+		// game states
 			
 		// title screen
 		var showPressSpace = true;
@@ -121,6 +117,7 @@
 			// clear the canvas
 			ctx.fillStyle="#fff";
 			ctx.fillRect(0,0,16,16);
+                        ctx.shadowBlur = 1; // this works right?
 			
 			// draw game objects
 			if (showPressSpace) {
@@ -211,6 +208,7 @@
 			// clear the canvas
 			ctx.fillStyle="#fff";
 			ctx.fillRect(0,0,16,16);
+                        ctx.shadowBlur = 1; // this works?
 			
 			// draw cacti
 			for (var i = 0; i < cacti.length; i++) {
