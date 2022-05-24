@@ -35,24 +35,20 @@
 				
 			} else {
 				start();
-				console.log("start");
 			}
 		}
 		
 		// create image objects
-		var dinoImage 		= addImage("images/dino.png");
-		var cactiImage 		= addImage("images/cacti.png");
-		var pressSpace 		= addImage("images/press_space.png");
-		var digits 		= addImage("images/digits.png");
+		var dinoImage 	= addImage("images/dino.png");
+		var cactiImage 	= addImage("images/cacti.png");
+		var pressSpace 	= addImage("images/press_space.png");
+		var digits = addImage("images/digits.png");
 		
 		loadImages();
 		
-		// sets the favicon (duh)
+		// sets the favicon
 		function setFavicon() {
 			var favicon = document.getElementById("favicon");
-			//var newIcon = favicon.cloneNode(true);
-			//newIcon.setAttribute("href", canvas.toDataURL());
-			//favicon.parentNode.replaceChild(newIcon, favicon);
 			favicon.setAttribute("href", canvas.toDataURL());
 			history.replaceState(null, null, window.location.hash == "#1" ? "#0" : "#1");
 		}
@@ -60,14 +56,12 @@
 		// event handling
 		var spaceDown = false;
 		window.addEventListener("keydown", function(event) {
-			// 32 = space
-			if (event.keyCode == 32) {
+			if (event.keyCode == 32) { // 32 = space
 				spaceDown = true;
 			}
 		})
 		window.addEventListener("keyup", function(event) {
-			// 32 = space
-			if (event.keyCode == 32) {
+			if (event.keyCode == 32) { // 32 = space
 				spaceDown = false;
 			}
 		})
@@ -91,7 +85,7 @@
 		var highScore = 0;
 		var score = 0;
 			
-		/* game states */
+		// game states (unused?)
 			
 		// title screen
 		var showPressSpace = true;
@@ -121,6 +115,7 @@
 			// clear the canvas
 			ctx.fillStyle="#fff";
 			ctx.fillRect(0,0,16,16);
+                        ctx.shadowBlur = 1; // this works right?
 			
 			// draw game objects
 			if (showPressSpace) {
@@ -138,6 +133,7 @@
 		var dinoY = 0; // the bottom of the dino's feet (distance from bottom of icon)
 		var yVel = 0.0;
 		var xSpeed = 1.0;
+		var thing = 0.3;
 		
 		var cacti = []; // stores x pos and type of cacti
 		
@@ -213,6 +209,7 @@
 			// clear the canvas
 			ctx.fillStyle="#fff";
 			ctx.fillRect(0,0,16,16);
+                        ctx.shadowBlur = 1; // this works?
 			
 			// draw cacti
 			for (var i = 0; i < cacti.length; i++) {
@@ -234,30 +231,26 @@
 			}
 			
 			// draw dino
-			ctx.drawImage(dinoImage, 0, 16 - (dinoY + 4));
+			ctx.drawImage(dinoImage, 0, 16 - (dinoY + 4 + thing)); //eh
 			
-			// draw score
-			var scoreStr = score.toString();
+			var scoreStr = score.toString(); // draw score
 			
 			// draw digits from largest to smallest
 			for (var i = 4; i-- > 0;) {
 				if (i > scoreStr.length - 1) {
-					// draw placeholder 0
-					var digitSheetPos = 0 * 4;
+					var digitSheetPos = 0 * 4; // draw placeholder 0
 					ctx.drawImage(digits, digitSheetPos, 0, 4, 5, 16 - ((i + 1) * 4), 0, 4, 5);
 				} else {
-					// get the current digit from the string
-					var digit = parseInt(scoreStr[(scoreStr.length - 1) - i]);
+					var digit = parseInt(scoreStr[(scoreStr.length - 1) - i]); // get the current digit from the string
 					
-					// draw current digit
-					var digitSheetPos = digit * 4;
+					var digitSheetPos = digit * 4; // draw current digit
 					ctx.drawImage(digits, digitSheetPos, 0, 4, 5, 16 - ((i + 1) * 4), 0, 4, 5);
 				}
 			}
 		}
 			
 		function gameQuit() {
-			yVel = 0;
+			yVel = 0; // reset yVel.
 		}
 			
 		// game over
@@ -271,17 +264,15 @@
 			}
 			
 			if (spaceDown) {
-				// prevent the game from starting over if space was already held down
-				newSpacePress = false;
+				newSpacePress = false;	// prevent the game from starting over if space was already held down
 			}
 		}
 		
 		function gameOver() {
-			// prevent the game from starting over if space was already held down
-			if (spaceDown && newSpacePress) {
+			if (spaceDown && newSpacePress) { // prevent the game from starting over if space was already held down
 				currentState = game;
 				gameStart();
-			} else if (!spaceDown && !newSpacePress) {
+			} else if (!spaceDown && !newSpacePress) { // prevent the game from starting over if space was already held down
 				newSpacePress = true;
 			}
 		}
